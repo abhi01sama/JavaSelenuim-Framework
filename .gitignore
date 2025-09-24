@@ -1,0 +1,50 @@
+# Ignore Maven's target folder (build artifacts)
+target/
+
+# Ignore IntelliJ IDEA project files
+.idea/
+*.iml
+
+# Ignore Eclipse project files
+*.classpath
+*.project
+.settings/
+
+# Ignore OS-specific files (e.g., MacOS, Windows, Linux)
+.DS_Store
+Thumbs.db
+
+# Ignore Java compiled class files
+*.class
+
+# Ignore log files
+*.log
+
+# Ignore dependency manager directories
+/.mvn/
+mvnw
+mvnw.cmd
+
+# Ignore SLF4J logs (if used in the project)
+log/
+
+# Ignore temporary files created by the system or IDE
+*.tmp
+*.swp
+*.swo
+
+# Ignore Selenium WebDriver related files (especially when running tests)
+chromedriver
+geckodriver
+IEDriverServer
+
+# Ignore .env or configuration files with sensitive data (if any)
+.env
+
+# Ignore IDE-specific configuration files (NetBeans, Visual Studio Code, etc.)
+.vscode/
+nbproject/
+
+# Ignore any other custom config directories or files you don't want in the repo
+config/
+*.properties
