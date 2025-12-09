@@ -9,33 +9,37 @@ import org.openqa.selenium.support.PageFactory;
 import jam.AbstractComponents.AbstractComponent;
 
 public class CheckoutPage extends AbstractComponent {
-WebDriver driver;
+	WebDriver driver;
+
 	public CheckoutPage(WebDriver driver) {
 		super(driver);
-		this.driver=driver;
+		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
-	@FindBy(css=".action__submit")
+
+	@FindBy(css = ".action__submit")
 	WebElement submit;
-	@FindBy(css="[placeholder='Select Country']")
+	
+	@FindBy(css = "[placeholder='Select Country']")
 	WebElement country;
-	@FindBy(xpath ="(//button[contains(@class,'ta-item')])[2]")
+	
+	@FindBy(xpath = "(//button[contains(@class,'ta-item')])[2]")
 	WebElement selectCountry;
-	
-	By results = By.cssSelector(".ta-result");
-	
-	public void selectCountry(String countryName ) {
+
+	By results = By.cssSelector(".ta-results");
+
+	public void selectCountry(String countryName) {
 		Actions a = new Actions(driver);
 		a.sendKeys(country, countryName).build().perform();
 		waitForElementToAppear(By.cssSelector(".ta-results"));
 		selectCountry.click();
-		
+
 	}
-	
-	public ConfirmatioPage submitOrder() {
+
+	public ConfirmationPage submitOrder() {
 		submit.click();
-		 return new ConfirmatioPage(driver);
-		
+		return new ConfirmationPage(driver);
+
 	}
 
 }

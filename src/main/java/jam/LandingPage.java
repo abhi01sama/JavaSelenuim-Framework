@@ -1,5 +1,6 @@
 package jam;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,8 +9,8 @@ import org.openqa.selenium.support.PageFactory;
 import jam.AbstractComponents.AbstractComponent;
 
 public class LandingPage extends AbstractComponent {
-	WebDriver driver;
 
+	WebDriver driver;
 	public LandingPage(WebDriver driver) {
 		super(driver);
 		this.driver = driver;
@@ -32,8 +33,21 @@ public class LandingPage extends AbstractComponent {
 		userEmail.sendKeys(email);
 		password.sendKeys(pass);
 		submit.click();
-		ProductCatalogue productcatalogue = new ProductCatalogue(driver);
-		return productcatalogue;
+		// wait for the next page to fully load before returning ProductCatalogue
+		waitForPageLoad();
+		// After submit, either the product catalogue should appear or an error message will show.
+		try {
+			waitForElementToAppear(By.cssSelector(".mb-3"));
+			return new ProductCatalogue(driver);
+		} catch (Exception e) {
+			// if login failed, capture the error message and throw a clear exception
+			try {
+				String err = getErrorMessage();
+				throw new RuntimeException("Login failed: " + err);
+			} catch (Exception inner) {
+				throw new RuntimeException("Login failed and product list did not load.", e);
+			}
+		}
 	}
 
 	public String getErrorMessage() {
