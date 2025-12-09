@@ -45,6 +45,3 @@ IEDriverServer
 .vscode/
 nbproject/
 
-# Ignore any other custom config directories or files you don't want in the repo
-config/
-*.properties
